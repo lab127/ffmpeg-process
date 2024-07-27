@@ -1,2 +1,2 @@
-/test/*
-/audio/*
+audio-video/*
+!audio-video/.gitkeep
