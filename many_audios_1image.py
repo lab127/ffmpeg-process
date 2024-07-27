@@ -17,7 +17,7 @@ for file in os.listdir(audio_input_dir):
     audio_filter += f"[{index}:a]atrim=end=2,asetpts=PTS-STARTPTS[a{index}];"
 
 # ok - tinggal dikecilin
-command = f'ffmpeg -r 24 -loop 1 -i "{image_source}" {audio_source}-filter_complex "{audio_index}concat=n={index}:v=0:a=1[outa]" -map 0:v -map "[outa]" -tune stillimage -pix_fmt yuv420p -shortest {video_output}'
+command = f'ffmpeg -r 24 -loop 1 -i "{image_source}" {audio_source}-filter_complex "[0:v]scale=1280:720[v];{audio_index}concat=n={index}:v=0:a=1[outa]" -map "[v]" -map "[outa]" -tune stillimage -pix_fmt yuv420p -shortest "{video_output}"'
 
 print(command)
 os.system(command)
