@@ -21,3 +21,5 @@ while true; do
     -acodec libmp3lame -ar 44100 -threads 6 -qscale:v 3 -b:a 320000 -bufsize 512k \
     -f flv "$YOUTUBE_URL/$KEY"
 done
+
+ffmpeg -re -loop 1 -i "/content/drive/My Drive//images/wallhaven-d6y12l.jpg" -i "/content/drive/My Drive//audio/Sleep - KaizanBlu.mp3" -i "/content/drive/My Drive//audio/Sleep Away by Evol.mp3" -i "/content/drive/My Drive//audio/Soul Aches by Yakuzee Beatz.mp3" -i "/content/drive/My Drive//audio/Stay - KaizanBlu (No Copyright) Chill Relaxing LoFi HipHop Music [No Copyright Music].mp3" -i "/content/drive/My Drive//audio/Swan Mother by Homie Cat.mp3" -filter_complex "[0:v]scale=1280:720[v];[1:0][2:0][3:0][4:0][5:0]concat=n=5:v=0:a=1[outa]" -map "[v]" -map "[outa]" -vcodec libx264 -preset superfast -b:v 2500k -pix_fmt yuv420p -r 30 -g 60 -acodec libmp3lame -ar 44100 -threads 6 -qscale:v 3 -b:a 128k -bufsize 512k -f flv "rtmp://a.rtmp.youtube.com/live2/8t6r-m4ek-mzp4-kscw-fx68"
