@@ -1,23 +1,38 @@
 import os
+from random import shuffle, randint
 
-image_source = "audio-video/images/wallhaven-d6y12l.jpg"
-audio_input_dir = "audio-video/audio"
+
+image_source = "audio-video/images/kid-coffeee-by-cromaconceptovisual.jpg"
+audio_input_dir = "audio-video/songs"
 video_output = "audio-video/output/output_video.mp4"
+
+
+def random_playlist(lst, n):
+    shuffle(lst)
+    # https://stackoverflow.com/a/2136090
+    chunks = [lst[i::n] for i in range(n)]
+    chunk_lst = chunks[randint(0, n - 1)]
+    shuffle(chunk_lst)
+    return chunk_lst
+
+
+lst = os.listdir("audio-video/songs")
+playlist = random_playlist(lst, 5)
 
 audio_source = ""
 audio_index = ""
 index = 0
-for file in os.listdir(audio_input_dir):
+for file in playlist:
     audio_source += f'-i "{audio_input_dir}/{file}" '
     audio_index += f"[{index + 1}:0]"
     index += 1
 
 quality = "veryfast"
-fps = 30
+fps = 24
 vbr = 1000
 abr = 128
 
-command = f'-re -loop 1 -i "{image_source}" {audio_source}-filter_complex\
+command = f'-loop 1 -i "{image_source}" {audio_source}-filter_complex\
  "[0:v]scale=1280:720[v];{audio_index}concat=n={index}:v=0:a=1[outa]"\
  -map "[v]" -map "[outa]"\
  -c:v libx264 -preset {quality} -b:v {vbr}k -maxrate {vbr}k\
@@ -26,4 +41,4 @@ command = f'-re -loop 1 -i "{image_source}" {audio_source}-filter_complex\
  "{video_output}"'
 
 print(command)
-os.system(command)
+os.system(f"ffmpeg {command}")
