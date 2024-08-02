@@ -1,20 +1,23 @@
 import os
 
-video_dir = "videos"
+video_dir = "audio-video/audio"
+video_output = "audio-video/output/output_video-cek.mp4"
 video_index = ""
 source = ""
 video_scale = ""
 index = 0
 for file in os.listdir(video_dir):
     source += f'-i "{video_dir}/{file}" '
-    video_scale += f'[{index}:v] scale=1280:720:force_original_aspect_ratio=decrease:eval=frame,pad=1280:720:-1:-1:color=black[v{index}]; '
+    video_scale += f"[{index}:v] scale=1280:720:force_original_aspect_ratio=decrease:eval=frame,pad=1280:720:-1:-1:color=black[v{index}]; "
     # video_index += f'[{index}:v:0] [{index}:a:0] '
-    video_index += f'[v{index}][{index}:a]'
+    video_index += f"[v{index}][{index}:a]"
     index += 1
 
-command = f'{source}-filter_complex "{video_scale}{video_index} concat=n={index}:v=1:a=1 [v] [a]" -map [v] -map [a] -s hd720 -vcodec libx264'
+command = f'{source}-filter_complex "{video_scale}{video_index} concat=n={index}:v=1:a=1 [v] [a]" -map [v] -map [a] -s hd720 -vcodec libx264 {video_output}'
 # command = f'{source}-filter_complex "{video_index}concat=n={index}:v=1:a=1 [outv] [outa]"'
 print(command)
+
+os.system(f"ffmpeg {command}")
 
 # command = f'{source}\
 # -filter_complex "{video_index}concat=n={index}:v=1:a=1[outv][outa]" \

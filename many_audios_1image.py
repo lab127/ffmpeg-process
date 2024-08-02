@@ -9,11 +9,13 @@ video_output = "audio-video/output/output_video.mp4"
 
 def random_playlist(lst, n):
     shuffle(lst)
-    # https://stackoverflow.com/a/2136090
-    chunks = [lst[i::n] for i in range(n)]
-    chunk_lst = chunks[randint(0, n - 1)]
-    shuffle(chunk_lst)
-    return chunk_lst
+    if len(lst > n):
+        # https://stackoverflow.com/a/2136090
+        chunks = [lst[i::n] for i in range(n)]
+        chunk_lst = chunks[randint(0, n - 1)]
+        shuffle(chunk_lst)
+        return chunk_lst
+    return lst
 
 
 lst = os.listdir("audio-video/songs")
@@ -41,4 +43,4 @@ command = f'-loop 1 -i "{image_source}" {audio_source}-filter_complex\
  "{video_output}"'
 
 print(command)
-os.system(f"ffmpeg {command}")
+# os.system(f"ffmpeg {command}")
