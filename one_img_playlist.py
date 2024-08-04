@@ -16,10 +16,12 @@ def random_playlist(lst, n):
     return lst
 
 
-image_source = "audio-video/images/kid-coffeee-by-cromaconceptovisual.jpg"
+image_name = "ai-generated-8274619_1920.png"
+file_name = "Sunrise Jazz Vibe Music Relaxing Ready to Work with A Cup of Coffee"
+image_source = f"audio-video/images/{image_name}"
 audio_folder = "audio-video/songs"
-file_name = "audio-video/output/one-img-playlist-720"
-video_output = "{file_name}.mp4"
+file_dir = f"audio-video/output/{file_name}"
+video_output = f"{file_dir}.mp4"
 
 lst = os.listdir(audio_folder)
 playlist = random_playlist(lst, 4)
@@ -33,7 +35,7 @@ for file in playlist:
     audio_index += f"[{index + 1}:0]"
     index += 1
 
-with open(f"{file_name}.txt", "w", encoding="utf-8") as fp:
+with open(f"{file_dir}.txt", "w", encoding="utf-8") as fp:
     for item in playlist:
         # write each item on a new line
         fp.write("%s\n" % item.replace(".mp3", ""))
