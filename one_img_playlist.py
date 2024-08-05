@@ -16,8 +16,8 @@ def random_playlist(lst, n):
     return lst
 
 
-image_name = "ai-generated-8274619_1920.png"
-file_name = "Sunrise Jazz Vibe Music Relaxing Ready to Work with A Cup of Coffee"
+image_name = "ai-generated-8448056.png"
+file_name = "Relaxing Jazzy Vibe Music at Midnight"
 image_source = f"audio-video/images/{image_name}"
 audio_folder = "audio-video/songs"
 file_dir = f"audio-video/output/{file_name}"
