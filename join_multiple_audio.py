@@ -16,7 +16,7 @@ def random_playlist(lst, n):
     return lst
 
 
-file_name = "test join audios"
+file_name = "Playlist Random"
 audio_folder = "audio-video/songs"
 file_dir = f"audio-video/output/{file_name}"
 file_output = f"{file_dir}.mp3"
