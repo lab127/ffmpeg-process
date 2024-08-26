@@ -1,0 +1,1 @@
+ffmpeg -f concat -safe 0 -i playlist.txt -vf "drawtext=text='%{metadata\:title}':fontcolor=white:fontsize=24:x=w-tw-10:y=10:box=1:boxcolor=black" -r 12 -c:v libx264 concat-output.mp4
